@@ -20,7 +20,7 @@ public class DeliveryDaoImp implements DeliveryDao<Delivery> {
     @Override
     public List<Delivery> getAll() {
         String sql = "SELECT * FROM deliveries";
-        return jdbcTemplate.query(sql, (rs, rowNum)->{
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
             Delivery delivery = new Delivery();
             delivery.setDelivery_id(rs.getInt("delivery_id"));
             delivery.setItem_id(rs.getInt("item_id"));
@@ -39,7 +39,7 @@ public class DeliveryDaoImp implements DeliveryDao<Delivery> {
     public void create(Delivery delivery) {
         String sql = "INSERT INTO deliveries(item_id, address, quantity) VALUES(?, ?, ?)";
         int insert = jdbcTemplate.update(sql, delivery.getItem_id(), delivery.getAddress(), delivery.getQuantity());
-        if(insert == 1){
+        if (insert == 1) {
             System.out.printf("Delivery Successfully added!");
         }
     }
@@ -53,14 +53,14 @@ public class DeliveryDaoImp implements DeliveryDao<Delivery> {
     public int delete(int delivery_id) {
         String sql = "DELETE FROM items WHERE delivery_id = ?";
         int insert = 0;
-        try{
+        try {
             insert = jdbcTemplate.update(sql, delivery_id);
             System.out.println(insert);
-            if(insert == 1){
+            if (insert == 1) {
                 System.out.printf("Delivery Successfully deleted!");
             }
             return insert;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("cannot delete!");
             return insert;
         }

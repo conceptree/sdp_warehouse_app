@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class DepositDaoImp implements DepositDao<Deposit>{
+public class DepositDaoImp implements DepositDao<Deposit> {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -21,7 +21,7 @@ public class DepositDaoImp implements DepositDao<Deposit>{
     @Override
     public List<Deposit> getAll() {
         String sql = "SELECT * FROM deposits";
-        return jdbcTemplate.query(sql, (rs, rowNum)->{
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
             Deposit deposit = new Deposit();
             deposit.setDeposit_id(rs.getInt("deposits_id"));
             deposit.setItem_id(rs.getInt("item_id"));
@@ -39,7 +39,7 @@ public class DepositDaoImp implements DepositDao<Deposit>{
     public void create(Deposit deposit) {
         String sql = "INSERT INTO deposits(item_id, quantity) VALUES(?, ?)";
         int insert = jdbcTemplate.update(sql, deposit.getItem_id(), deposit.getQuantity());
-        if(insert == 1){
+        if (insert == 1) {
             System.out.printf("Deposit Successfully added!");
         }
     }
@@ -53,14 +53,14 @@ public class DepositDaoImp implements DepositDao<Deposit>{
     public int delete(int deposit_id) {
         String sql = "DELETE FROM items WHERE deposit_id = ?";
         int insert = 0;
-        try{
+        try {
             insert = jdbcTemplate.update(sql, deposit_id);
             System.out.println(insert);
-            if(insert == 1){
+            if (insert == 1) {
                 System.out.printf("Deposit Successfully deleted!");
             }
             return insert;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("cannot delete!");
             return insert;
         }

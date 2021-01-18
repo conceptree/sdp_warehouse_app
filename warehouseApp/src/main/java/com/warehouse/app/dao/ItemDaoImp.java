@@ -19,7 +19,7 @@ public class ItemDaoImp implements ItemDao<Item> {
     @Override
     public List<Item> getAll() {
         String sql = "SELECT * FROM items";
-        return jdbcTemplate.query(sql, (rs, rowNum)->{
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
             Item item = new Item();
             item.setItem_id(rs.getInt("item_id"));
             item.setTypeName(rs.getString("typeName"));
@@ -37,7 +37,7 @@ public class ItemDaoImp implements ItemDao<Item> {
     public void create(Item item) {
         String sql = "INSERT INTO items(typeName, description) VALUES(?, ?)";
         int insert = jdbcTemplate.update(sql, item.getTypeName(), item.getDescription());
-        if(insert == 1){
+        if (insert == 1) {
             System.out.printf("Item Successfully added!");
         }
     }
@@ -51,14 +51,14 @@ public class ItemDaoImp implements ItemDao<Item> {
     public int delete(int item_id) {
         String sql = "DELETE FROM items WHERE item_id = ?";
         int insert = 0;
-        try{
+        try {
             insert = jdbcTemplate.update(sql, item_id);
             System.out.println(insert);
-            if(insert == 1){
+            if (insert == 1) {
                 System.out.printf("Item Successfully deleted!");
             }
             return insert;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("cannot delete!");
             return insert;
         }

@@ -1,4 +1,5 @@
 package com.warehouse.app.controllers;
+
 import com.warehouse.app.dao.DeliveryDaoImp;
 import com.warehouse.app.dao.DepositDaoImp;
 import com.warehouse.app.dao.ItemDaoImp;
@@ -25,37 +26,37 @@ public class MainController {
 
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/items")
-    public List<Item> getItems(){
+    public List<Item> getItems() {
         return this.itemDaoImp.getAll();
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/deposits")
-    public List<Deposit> getDeposits(){
+    public List<Deposit> getDeposits() {
         return this.depositDaoImp.getAll();
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/deliveries")
-    public List<Delivery> getDeliveries(){
+    public List<Delivery> getDeliveries() {
         return this.deliveryDaoImp.getAll();
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/items")
-    public void createItem(@RequestBody Item item){
+    public void createItem(@RequestBody Item item) {
         this.itemDaoImp.create(item);
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/deposits")
-    public void createDeposit(@RequestBody Deposit deposit){
+    public void createDeposit(@RequestBody Deposit deposit) {
         this.depositDaoImp.create(deposit);
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/deliveries")
-    public void createDelivery(@RequestBody Delivery delivery){
+    public void createDelivery(@RequestBody Delivery delivery) {
         this.deliveryDaoImp.create(delivery);
     }
 
